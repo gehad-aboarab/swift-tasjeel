@@ -16,11 +16,15 @@ import java.net.URL;
 
 public class MainActivity extends Activity {
     private Button loginButton, signupButton;
+    private BrokerApplication application;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        application = (BrokerApplication) getApplication();
+        application.initDB();
 
         loginButton = (Button) findViewById(R.id.main_loginButton);
         signupButton = (Button) findViewById(R.id.main_signupButton);
@@ -29,7 +33,7 @@ public class MainActivity extends Activity {
         loginButton.setOnClickListener(buttonListener);
         signupButton.setOnClickListener(buttonListener);
 
-        testAccess();
+//        testAccess();
     }
 
     class ButtonListener implements View.OnClickListener{

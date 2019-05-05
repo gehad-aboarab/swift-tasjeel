@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +28,7 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
         application = (BrokerApplication) getApplication();
-        database = new DatabaseHelper();
+        database = application.database;
 
         emailEditText = (EditText) findViewById(R.id.login_emailEditText);
         passwordEditText = (EditText) findViewById(R.id.login_passwordEditText);
@@ -89,10 +90,17 @@ public class LoginActivity extends Activity {
             protected void onPostExecute(final Boolean success) {
                 // Access system if authentication verified, otherwise show error
                 if (success) {
-                    loadProfile(result);
-                    Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
+                    try {
+                        if(result.get("password").equals(password)){
+                            loadProfile(result);
+                            Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
 //                    Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
 //                    startActivity(intent);
+                        }
+                    } catch (JSONException e) {
+                        passwordEditText.setError("You have entered an incorrect password, please try again!");
+                        passwordEditText.requestFocus();
+                    }
                 } else {
                   passwordEditText.setError("You have entered incorrect credentials, please try again!");
                   passwordEditText.requestFocus();
@@ -102,15 +110,16 @@ public class LoginActivity extends Activity {
     }
 
     public void loadProfile(JSONObject user){
-        String name, registration_no, license_no, credit_card;
+        String name, registration_no, license_no, credit_card, email;
         try {
             name = user.getString("name");
             license_no = user.getString("license-no");
             registration_no = user.getString("registration-no");
             credit_card = user.getString("credit-card");
+            email = user.getString("email");
 
-            if(name!=null && license_no!=null && registration_no!=null && license_no!=null && credit_card!=null)
-                application.loadProfile(name, license_no, registration_no, credit_card);
+            if(name!=null && license_no!=null && registration_no!=null && license_no!=null && credit_card!=null && email!=null)
+                application.loadProfile(name, email, registration_no, license_no, credit_card);
             else
                 Toast.makeText(getApplicationContext(), "Server error occurred. Please try again.", Toast.LENGTH_LONG).show();
         } catch (JSONException e) {

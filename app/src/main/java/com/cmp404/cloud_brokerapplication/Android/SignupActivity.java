@@ -1,6 +1,7 @@
 package com.cmp404.cloud_brokerapplication.Android;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -118,8 +119,8 @@ public class SignupActivity extends Activity {
                     if(result.get("password").equals(password)){
                         loadProfile(result);
                         Toast.makeText(getApplicationContext(), "Signup successful!", Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
-//                    startActivity(intent);
+                        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                        startActivity(intent);
                     }
                 } catch (JSONException e) {
                     emailEditText.setError("This email is used by another account.");

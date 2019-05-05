@@ -4,61 +4,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background2"
+    android:background="#eeee"
     tools:context=".Android.ProfileActivity">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="149dp"
-        android:layout_height="258dp"
+        android:id="@+id/dashboard_userImage"
+        android:layout_width="159dp"
+        android:layout_height="163dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
         android:src="@drawable/profileuser"
-        tools:layout_editor_absoluteX="131dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/profile_namemaintextview"
+        android:id="@+id/profile_nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginTop="8dp"
+        android:text="Name"
         android:textSize="40sp"
-        tools:layout_editor_absoluteX="123dp"
-        tools:layout_editor_absoluteY="231dp" />
+        android:fontFamily="sans-serif-condensed"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_userImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/profile_licensetextview"
+        android:id="@+id/profile_licenseTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="License"
+        android:fontFamily="sans-serif-condensed"
         android:textSize="25sp"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="285dp" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="225dp"
-        android:layout_height="94dp"
-        android:background="@drawable/roundb"
-        android:text="Start Process"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="421dp" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="225dp"
-        android:layout_height="94dp"
-        android:background="@drawable/roundb"
-        android:text="Edit Profile"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="557dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_nameTextView" />
 
     <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="412dp"
-        android:layout_height="34dp"
+        android:id="@+id/profile_dividerImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         android:src="@drawable/greenline"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="335dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_licenseTextView" />
+
+    <Button
+        android:id="@+id/profile_startButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/roundb"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Start Process"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/profile_editProfileButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/profile_editProfileButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/roundb"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Edit Profile"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

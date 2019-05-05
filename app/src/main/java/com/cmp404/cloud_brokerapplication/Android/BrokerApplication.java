@@ -4,12 +4,8 @@ import android.app.Application;
 
 import com.cmp404.cloud_brokerapplication.Helpers.DatabaseHelper;
 
-/**
- * Created by Gehad on 5/3/2019.
- */
-
 public class BrokerApplication extends Application {
-    private String currentUserName, currentEmail, currentRegistrationNo, currentLicenseNo, currentCreditCard;
+    public String currentUserName, currentEmail, currentRegistrationNo, currentLicenseNo, currentCreditCard;
     public DatabaseHelper database;
 
     public BrokerApplication(){

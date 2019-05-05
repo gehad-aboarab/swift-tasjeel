@@ -94,8 +94,8 @@ public class LoginActivity extends Activity {
                         if(result.get("password").equals(password)){
                             loadProfile(result);
                             Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
-//                    startActivity(intent);
+                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                            startActivity(intent);
                         }
                     } catch (JSONException e) {
                         passwordEditText.setError("You have entered an incorrect password, please try again!");

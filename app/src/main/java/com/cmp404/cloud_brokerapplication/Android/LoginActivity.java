@@ -93,7 +93,6 @@ public class LoginActivity extends Activity {
                     try {
                         if(result.get("password").equals(password)){
                             loadProfile(result);
-                            Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                             startActivity(intent);
                         }

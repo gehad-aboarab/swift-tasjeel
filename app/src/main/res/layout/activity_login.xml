@@ -48,7 +48,7 @@
         android:hint="Email"
         android:fontFamily="sans-serif-condensed"
         android:inputType="textWebEmailAddress"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_titleTextView" />
@@ -66,7 +66,7 @@
         android:hint="Password"
         android:inputType="textPassword"
         android:fontFamily="sans-serif-condensed"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_emailEditText"/>
@@ -98,6 +98,7 @@
         android:fontFamily="sans-serif-condensed"
         android:background="@null"
         android:text="Forgot Password?"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

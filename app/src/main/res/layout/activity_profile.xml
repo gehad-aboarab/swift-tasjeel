@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/dashboard_userImage"
-        android:layout_width="159dp"
-        android:layout_height="163dp"
+        android:layout_width="132dp"
+        android:layout_height="135dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
@@ -24,33 +24,57 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Name"
-        android:textSize="40sp"
+        android:text="Gehad"
+        android:textSize="26sp"
         android:fontFamily="sans-serif-condensed"
+        android:textColor="#6b6b6b"
         app:layout_constraintTop_toBottomOf="@+id/dashboard_userImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/profile_licenseTextView"
+        android:id="@+id/profile_emailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="License"
+        android:text="gehad.aboarab@gmail.com"
         android:fontFamily="sans-serif-condensed"
-        android:textSize="25sp"
+        android:textSize="18sp"
+        android:textColor="#6b6b6b"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_nameTextView" />
 
-    <ImageView
-        android:id="@+id/profile_dividerImage"
+    <TextView
+        android:id="@+id/profile_licenseTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:text="Dubai L11731"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="18sp"
+        android:textColor="#6b6b6b"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_emailTextView" />
+
+    <TextView
+        android:id="@+id/profile_registrationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2314 3221 4323 4421"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="18sp"
+        android:textColor="#6b6b6b"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_licenseTextView" />
+
+    <ImageView
+        android:id="@+id/profile_dividerImage"
+        android:layout_width="1008dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="40dp"
         android:src="@drawable/greenline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_licenseTextView" />
 

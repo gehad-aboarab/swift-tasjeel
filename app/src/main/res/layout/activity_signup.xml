@@ -20,7 +20,7 @@
         android:text="Sign Up"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center"
-        android:textSize="36sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +37,7 @@
         android:hint="Name"
         android:inputType="textPersonName"
         android:fontFamily="sans-serif-condensed"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_titleTextView" />
@@ -55,7 +55,7 @@
         android:ems="10"
         android:hint="Email"
         android:inputType="textWebEmailAddress"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_nameEditText"/>
@@ -73,7 +73,7 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_emailEditText"/>
@@ -91,7 +91,7 @@
         android:ems="10"
         android:hint="Registration Number"
         android:inputType="text"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_passwordEditText"/>
@@ -109,7 +109,7 @@
         android:ems="10"
         android:hint="License Plate"
         android:inputType="text"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_registrationEditText"/>
@@ -127,7 +127,7 @@
         android:ems="10"
         android:hint="Credit Card Number"
         android:inputType="text"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_plateEditText"/>
@@ -145,7 +145,7 @@
         android:ems="10"
         android:hint="CVV"
         android:inputType="number"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_creditEditText"/>

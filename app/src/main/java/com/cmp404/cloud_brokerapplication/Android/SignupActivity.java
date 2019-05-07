@@ -118,13 +118,12 @@ public class SignupActivity extends Activity {
                     try {
                     if(result.get("password").equals(password)){
                         loadProfile(result);
-                        Toast.makeText(getApplicationContext(), "Signup successful!", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                         startActivity(intent);
                     }
                 } catch (JSONException e) {
                     emailEditText.setError("This email is used by another account.");
-                        emailEditText.requestFocus();
+                    emailEditText.requestFocus();
                 }
 
 

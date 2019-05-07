@@ -1,47 +1,42 @@
 package com.cmp404.cloud_brokerapplication.Helpers;
 
-import android.util.Log;
 
-
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.cmp404.cloud_brokerapplication.Android.BrokerApplication;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
-import com.mongodb.lang.NonNull;
 import com.mongodb.stitch.android.core.Stitch;
 import com.mongodb.stitch.android.core.StitchAppClient;
-import com.mongodb.stitch.android.core.auth.StitchUser;
 import com.mongodb.stitch.android.services.mongodb.remote.RemoteFindIterable;
 import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoClient;
 import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCollection;
 import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
-import com.mongodb.stitch.core.services.mongodb.remote.RemoteUpdateOptions;
-import com.mongodb.stitch.core.services.mongodb.remote.RemoteUpdateResult;
 
 import org.bson.Document;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class DatabaseHelper {
+    private BrokerApplication application;
     final StitchAppClient client =
             Stitch.initializeDefaultAppClient("cloudbrokerapplication-cnhwv");
     final RemoteMongoClient mongoClient =
             client.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
-    final RemoteMongoCollection<Document> collection =
+    final RemoteMongoCollection<Document> userCollection =
             mongoClient.getDatabase("cloud-computing").getCollection("broker-user");
+    final RemoteMongoCollection<Document> entitiesCollection =
+            mongoClient.getDatabase("cloud-computing").getCollection("broker-registered-entity");
 
-    public DatabaseHelper() {
+    public DatabaseHelper(BrokerApplication application) {
+        this.application = application;
         client.getAuth().loginWithCredential(new AnonymousCredential());
     }
 
     public JSONObject exists(final String email) {
         final ArrayList<Document> documents = new ArrayList<Document>();
-        RemoteFindIterable<Document> iterable = collection.find();
+        RemoteFindIterable<Document> iterable = userCollection.find();
 
         Task task = iterable.into(documents);
         try {
@@ -91,7 +86,7 @@ public class DatabaseHelper {
             document.put("registrationNo", registrationNo);
             document.put("licenseNo", licenseNo);
             document.put("creditCard", creditCard);
-            collection.insertOne(document);
+            userCollection.insertOne(document);
 
             return new JSONObject(document);
 
@@ -106,4 +101,23 @@ public class DatabaseHelper {
         }
     }
 
+    public void initInsuranceCompanies(){
+        final ArrayList<Document> documents = new ArrayList<Document>();
+        RemoteFindIterable<Document> iterable = entitiesCollection.find();
+
+        Task task = iterable.into(documents);
+        try {
+            Tasks.await(task);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        application.insuranceCompanies = new ArrayList<>();
+        for(Document d:documents){
+            if(d.getString("type").equals("insurance"))
+                application.insuranceCompanies.add(d.getString("path"));
+        }
+    }
 }

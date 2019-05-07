@@ -26,7 +26,8 @@
         <activity android:name=".Android.ForgotPasswordActivity" />
         <activity android:name=".Android.DashboardActivity" />
         <activity android:name=".Android.ProfileActivity" />
-        <activity android:name=".Android.InsuranceActivity"></activity>
+        <activity android:name=".Android.InsuranceActivity" />
+        <activity android:name=".Android.TestingCenterActivity"></activity>
     </application>
 
 </manifest>

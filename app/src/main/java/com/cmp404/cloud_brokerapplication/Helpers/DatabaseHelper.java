@@ -2,6 +2,7 @@ package com.cmp404.cloud_brokerapplication.Helpers;
 
 
 import com.cmp404.cloud_brokerapplication.Android.BrokerApplication;
+import com.cmp404.cloud_brokerapplication.Entities.Insurance;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.mongodb.stitch.android.core.Stitch;
@@ -116,8 +117,11 @@ public class DatabaseHelper {
 
         application.insuranceCompanies = new ArrayList<>();
         for(Document d:documents){
-            if(d.getString("type").equals("insurance"))
-                application.insuranceCompanies.add(d.getString("path"));
+            if(d.getString("type").equals("insurance")) {
+                d.append("id", d.get("_id").toString());
+                d.remove("_id");
+                application.insuranceCompanies.add(new Insurance(new JSONObject(d)));
+            }
         }
     }
 }

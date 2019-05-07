@@ -2,8 +2,12 @@ package com.cmp404.cloud_brokerapplication.Android;
 
 import android.app.Application;
 
+import com.cmp404.cloud_brokerapplication.Entities.Insurance;
+import com.cmp404.cloud_brokerapplication.Entities.User;
 import com.cmp404.cloud_brokerapplication.Helpers.DatabaseHelper;
 import com.cmp404.cloud_brokerapplication.Helpers.WebServicesIO;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -25,8 +29,9 @@ public class BrokerApplication extends Application {
     public final String RTA_RENEWAL_FEES = "renewal-fees/";
     public final String RTA_RENEW_REGISTRATION = "renew-registration/";
 
-    public String currentUserName, currentEmail, currentRegistrationNo, currentLicenseNo, currentCreditCard;
-    public ArrayList<String> insuranceCompanies, insurancePackages;
+//    public String currentUserName, currentEmail, currentRegistrationNo, currentLicenseNo, currentCreditCard;
+    public User currentUser;
+    public ArrayList<Insurance> insuranceCompanies;
     public DatabaseHelper database;
     public WebServicesIO externalInterface;
 
@@ -38,11 +43,12 @@ public class BrokerApplication extends Application {
         externalInterface = new WebServicesIO(this);
     }
 
-    public void loadProfile(String name, String email, String registrationNo, String licenseNo, String creditCard){
-        currentUserName = name;
-        currentEmail = email;
-        currentRegistrationNo = registrationNo;
-        currentLicenseNo = licenseNo;
-        currentCreditCard = creditCard;
+    public void loadProfile(JSONObject user){//String name, String email, String registrationNo, String licenseNo, String creditCard){
+        currentUser = new User(user);
+//        currentUserName = name;
+//        currentEmail = email;
+//        currentRegistrationNo = registrationNo;
+//        currentLicenseNo = licenseNo;
+//        currentCreditCard = creditCard;
     }
 }

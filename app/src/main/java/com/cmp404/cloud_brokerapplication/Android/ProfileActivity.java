@@ -28,10 +28,10 @@ public class ProfileActivity extends Activity {
         processButton = (Button) findViewById(R.id.profile_startButton);
         editProfileButton = (Button) findViewById(R.id.profile_editProfileButton);
 
-        nameTextView.setText(application.currentUserName);
-        licensePlateTextView.setText(application.currentLicenseNo);
-        registrationTextView.setText(application.currentRegistrationNo);
-        emailTextView.setText(application.currentEmail);
+        nameTextView.setText(application.currentUser.name);
+        licensePlateTextView.setText(application.currentUser.licensePlate);
+        registrationTextView.setText(application.currentUser.registrationNo);
+        emailTextView.setText(application.currentUser.contact);
 
         processButton.setOnClickListener(new View.OnClickListener() {
             @Override

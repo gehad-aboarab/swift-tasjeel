@@ -109,20 +109,10 @@ public class LoginActivity extends Activity {
     }
 
     public void loadProfile(JSONObject user){
-        String name, registration_no, license_no, credit_card, email;
-        try {
-            name = user.getString("name");
-            license_no = user.getString("license-no");
-            registration_no = user.getString("registration-no");
-            credit_card = user.getString("credit-card");
-            email = user.getString("email");
-
-            if(name!=null && license_no!=null && registration_no!=null && license_no!=null && credit_card!=null && email!=null)
-                application.loadProfile(name, email, registration_no, license_no, credit_card);
+            if(user != null)
+                application.loadProfile(user);
             else
                 Toast.makeText(getApplicationContext(), "Server error occurred. Please try again.", Toast.LENGTH_LONG).show();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
     }
 }

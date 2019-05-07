@@ -3,10 +3,6 @@ package com.cmp404.cloud_brokerapplication.Entities;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by Gehad on 5/7/2019.
- */
-
 public class User {
     public String name;
     public String contact;
@@ -14,6 +10,7 @@ public class User {
     public String registrationNo;
     public String creditCard;
     public String insurancePackageRef;
+    public String testingCenterRef;
 
     public User(JSONObject object){
         try {

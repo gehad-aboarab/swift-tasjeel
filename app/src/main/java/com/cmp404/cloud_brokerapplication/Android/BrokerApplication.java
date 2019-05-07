@@ -3,6 +3,7 @@ package com.cmp404.cloud_brokerapplication.Android;
 import android.app.Application;
 
 import com.cmp404.cloud_brokerapplication.Entities.Insurance;
+import com.cmp404.cloud_brokerapplication.Entities.TestingCenter;
 import com.cmp404.cloud_brokerapplication.Entities.User;
 import com.cmp404.cloud_brokerapplication.Helpers.DatabaseHelper;
 import com.cmp404.cloud_brokerapplication.Helpers.WebServicesIO;
@@ -22,8 +23,8 @@ public class BrokerApplication extends Application {
     public final String INSURANCE_RENEW_PLAN = "renew-plan/";
     public final String INSURANCE_REGISTER_PACKAGE = "register-package/";
     public final String TESTING_CENTER_GET_TIMINGS = "get-timings";
-    public final String TESTING_CENTER_BOOK_TIMING = "book_timing/";
-    public final String TESTING_CENTER_BOOKED_TIMING = "booked_timing/";
+    public final String TESTING_CENTER_BOOK_TIMING = "book-timing/";
+    public final String TESTING_CENTER_BOOKED_TIMING = "booked-timing/";
     public final String DUBAI_POLICE_GET_FINES = "get-fines/";
     public final String DUBAI_POLICE_PAYMENT = "payment/";
     public final String RTA_RENEWAL_FEES = "renewal-fees/";
@@ -32,6 +33,7 @@ public class BrokerApplication extends Application {
 //    public String currentUserName, currentEmail, currentRegistrationNo, currentLicenseNo, currentCreditCard;
     public User currentUser;
     public ArrayList<Insurance> insuranceCompanies;
+    public ArrayList<TestingCenter> testingCenters;
     public DatabaseHelper database;
     public WebServicesIO externalInterface;
 
@@ -43,12 +45,7 @@ public class BrokerApplication extends Application {
         externalInterface = new WebServicesIO(this);
     }
 
-    public void loadProfile(JSONObject user){//String name, String email, String registrationNo, String licenseNo, String creditCard){
+    public void loadProfile(JSONObject user){
         currentUser = new User(user);
-//        currentUserName = name;
-//        currentEmail = email;
-//        currentRegistrationNo = registrationNo;
-//        currentLicenseNo = licenseNo;
-//        currentCreditCard = creditCard;
     }
 }

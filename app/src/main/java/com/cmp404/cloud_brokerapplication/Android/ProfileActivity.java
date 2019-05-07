@@ -36,7 +36,7 @@ public class ProfileActivity extends Activity {
         processButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), InsuranceActivity.class);
+                Intent intent = new Intent(getApplicationContext(), TestingCenterActivity.class);
                 startActivity(intent);
             }
         });

@@ -3,6 +3,7 @@ package com.cmp404.cloud_brokerapplication.Helpers;
 
 import com.cmp404.cloud_brokerapplication.Android.BrokerApplication;
 import com.cmp404.cloud_brokerapplication.Entities.Insurance;
+import com.cmp404.cloud_brokerapplication.Entities.TestingCenter;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.mongodb.stitch.android.core.Stitch;
@@ -121,6 +122,29 @@ public class DatabaseHelper {
                 d.append("id", d.get("_id").toString());
                 d.remove("_id");
                 application.insuranceCompanies.add(new Insurance(new JSONObject(d)));
+            }
+        }
+    }
+
+    public void initTestingCenters(){
+        final ArrayList<Document> documents = new ArrayList<Document>();
+        RemoteFindIterable<Document> iterable = entitiesCollection.find();
+
+        Task task = iterable.into(documents);
+        try {
+            Tasks.await(task);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        application.testingCenters = new ArrayList<>();
+        for(Document d:documents){
+            if(d.getString("type").equals("testing-center")) {
+                d.append("id", d.get("_id").toString());
+                d.remove("_id");
+                application.testingCenters.add(new TestingCenter(new JSONObject(d)));
             }
         }
     }

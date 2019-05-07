@@ -223,8 +223,12 @@ public class InsuranceActivity extends Activity {
 
         String result = application.externalInterface.callWebService(base + systemPath + company + service + params);
         try {
-            JSONObject resultObject = new JSONObject(result);
-            application.currentUser.insurancePackageRef = resultObject.getString("reference-no");
+            if(!result.equals("{}")) {
+                JSONObject resultObject = new JSONObject(result);
+                application.currentUser.insurancePackageRef = resultObject.getString("reference-no");
+                Toast.makeText(getApplicationContext(), "Registered for package successfully!", Toast.LENGTH_LONG).show();
+                finish();
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -239,7 +243,7 @@ public class InsuranceActivity extends Activity {
         String params = referenceNo + "/" + application.currentUser.creditCard + "/" + "1000";
 
         String result = application.externalInterface.callWebService(base + systemPath + company + service + params);
-        if(result != "{}"){
+        if(!result.equals("{}")){
             Toast.makeText(getApplicationContext(), "Plan renewed successfully!", Toast.LENGTH_LONG).show();
             finish();
         } else {

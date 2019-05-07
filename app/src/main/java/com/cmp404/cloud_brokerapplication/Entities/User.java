@@ -11,6 +11,7 @@ public class User {
     public String creditCard;
     public String insurancePackageRef;
     public String testingCenterRef;
+    public boolean paidFines;
 
     public User(JSONObject object){
         try {
@@ -19,6 +20,7 @@ public class User {
             licensePlate = object.getString("license-no");
             registrationNo = object.getString("registration-no");
             creditCard = object.getString("credit-card");
+            paidFines = false;
         } catch (JSONException e) {
             e.printStackTrace();
         }

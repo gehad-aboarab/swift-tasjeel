@@ -36,7 +36,7 @@ public class ProfileActivity extends Activity {
         processButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), TestingCenterActivity.class);
+                Intent intent = new Intent(getApplicationContext(), DubaiPoliceActivity.class);
                 startActivity(intent);
             }
         });

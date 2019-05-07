@@ -2,6 +2,7 @@ package com.cmp404.cloud_brokerapplication.Android;
 
 import android.app.Application;
 
+import com.cmp404.cloud_brokerapplication.Entities.Fine;
 import com.cmp404.cloud_brokerapplication.Entities.Insurance;
 import com.cmp404.cloud_brokerapplication.Entities.TestingCenter;
 import com.cmp404.cloud_brokerapplication.Entities.User;
@@ -34,6 +35,7 @@ public class BrokerApplication extends Application {
     public User currentUser;
     public ArrayList<Insurance> insuranceCompanies;
     public ArrayList<TestingCenter> testingCenters;
+    public ArrayList<Fine> trafficFines;
     public DatabaseHelper database;
     public WebServicesIO externalInterface;
 

@@ -3,6 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
 
-    <solid android:color="#FF58B999"/>
+    <solid android:color="#eee"/>
+    <stroke
+        android:width="3dp"
+        android:color="#FF58B999" />
 
 </shape>

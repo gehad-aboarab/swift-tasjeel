@@ -1,6 +1,7 @@
 package com.cmp404.cloud_brokerapplication.Android;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -47,6 +48,9 @@ public class TestingCenterActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testing_center);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
 
         application = (BrokerApplication) getApplication();
         database = application.database;
@@ -224,14 +228,15 @@ public class TestingCenterActivity extends Activity {
         String params = selectedTiming.date.substring(0,2) + "/" + selectedTiming.date.substring(3,5) + "/" +
                 selectedTiming.date.substring(6,10) + "/" + selectedTiming.time.substring(0,2) + selectedTiming.time.substring(3,5);
 
-        String result = application.externalInterface.callWebService(base + systemPath + company + service + params);
         Log.d("TestingCenter_Log", base + systemPath + company + service + params);
+        String result = application.externalInterface.callWebService(base + systemPath + company + service + params);
         Log.d("TestingCenter_Log", result);
         try {
             if(!result.equals("{}")) {
                 JSONObject resultObject = new JSONObject(result);
-                application.currentUser.testingCenterRef = resultObject.getString("customer-no");
-                Toast.makeText(getApplicationContext(), "Book timeslot successfully!", Toast.LENGTH_LONG).show();
+                application.currentUser.setTestingCenterRef(resultObject.getString("customer-no"));
+                application.currentUser.setBookingDone(true);
+                Toast.makeText(getApplicationContext(), "Book timeslot successfully.", Toast.LENGTH_LONG).show();
                 finish();
             }
 
@@ -247,8 +252,8 @@ public class TestingCenterActivity extends Activity {
         String service = application.TESTING_CENTER_BOOKED_TIMING;
         String params = customerNo;
 
-        String result = application.externalInterface.callWebService(base + systemPath + company + service + params);
         Log.d("TestingCenter_Log", base + systemPath + company + service + params);
+        String result = application.externalInterface.callWebService(base + systemPath + company + service + params);
         Log.d("TestingCenter_Log", result);
         return result;
     }

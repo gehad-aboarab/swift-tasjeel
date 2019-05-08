@@ -1,5 +1,6 @@
 package com.cmp404.cloud_brokerapplication.Android;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,9 @@ public class ProfileActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
+
         application = (BrokerApplication)getApplication();
 
         nameTextView = (TextView)findViewById(R.id.profile_nameTextView);
@@ -28,15 +32,23 @@ public class ProfileActivity extends Activity {
         processButton = (Button) findViewById(R.id.profile_startButton);
         editProfileButton = (Button) findViewById(R.id.profile_editProfileButton);
 
-        nameTextView.setText(application.currentUser.name);
-        licensePlateTextView.setText(application.currentUser.licensePlate);
-        registrationTextView.setText(application.currentUser.registrationNo);
-        emailTextView.setText(application.currentUser.contact);
+        nameTextView.setText(application.currentUser.getName());
+        licensePlateTextView.setText(application.currentUser.getLicensePlate());
+        registrationTextView.setText(application.currentUser.getRegistrationNo());
+        emailTextView.setText(application.currentUser.getContact());
 
         processButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DubaiPoliceActivity.class);
+                Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        editProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), EditProfileActivity.class);
                 startActivity(intent);
             }
         });

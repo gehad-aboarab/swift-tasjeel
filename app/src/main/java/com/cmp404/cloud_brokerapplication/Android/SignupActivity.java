@@ -1,9 +1,12 @@
 package com.cmp404.cloud_brokerapplication.Android;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +28,9 @@ public class SignupActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
 
         application = (BrokerApplication) getApplication();
         database = application.database;
@@ -90,7 +96,7 @@ public class SignupActivity extends Activity {
                     cancel = true;
                 }
 
-                if(!cancel){
+                if (!cancel) {
                     attemptSignup(email, password, name, registration, license, cc);
                 }
             }
@@ -98,14 +104,14 @@ public class SignupActivity extends Activity {
 
     }
 
-    public void attemptSignup(final String email, final String password, final String name, final String registration, final String license, final String cc){
+    public void attemptSignup(final String email, final String password, final String name, final String registration, final String license, final String cc) {
         new AsyncTask<Void, Void, Boolean>() {
             private JSONObject result;
 
             @Override
             protected Boolean doInBackground(Void... params) {
                 result = database.signup(email, password, name, registration, license, cc);
-                if(result == null)
+                if (result == null)
                     return false;
                 else
                     return true;
@@ -116,15 +122,15 @@ public class SignupActivity extends Activity {
                 // Access system if authentication verified, otherwise show error
                 if (success) {
                     try {
-                    if(result.get("password").equals(password)){
-                        loadProfile(result);
-                        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                        startActivity(intent);
+                        if (result.get("password").equals(password)) {
+                            loadProfile(result);
+                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                            startActivity(intent);
+                        }
+                    } catch (JSONException e) {
+                        emailEditText.setError("This email is used by another account.");
+                        emailEditText.requestFocus();
                     }
-                } catch (JSONException e) {
-                    emailEditText.setError("This email is used by another account.");
-                    emailEditText.requestFocus();
-                }
 
 
                 } else {
@@ -134,21 +140,10 @@ public class SignupActivity extends Activity {
         }.execute();
     }
 
-    public void loadProfile(JSONObject user){
-//        String name, registration_no, license_no, credit_card, email;
-//        try {
-//            name = user.getString("name");
-//            license_no = user.getString("license-no");
-//            registration_no = user.getString("registration-no");
-//            credit_card = user.getString("credit-card");
-//            email = user.getString("email");
-
-            if(user!=null)//name!=null && license_no!=null && registration_no!=null && license_no!=null && credit_card!=null && email!=null)
-                application.loadProfile(user); //name, email, registration_no, license_no, credit_card);
-            else
-                Toast.makeText(getApplicationContext(), "Server error occurred. Please try again.", Toast.LENGTH_LONG).show();
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+    public void loadProfile(JSONObject user) {
+        if (user != null)
+            application.loadProfile(user);
+        else
+            Toast.makeText(getApplicationContext(), "Server error occurred. Please try again.", Toast.LENGTH_LONG).show();
     }
 }

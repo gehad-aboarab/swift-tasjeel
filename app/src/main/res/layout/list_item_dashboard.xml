@@ -1,38 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:background="#eeee"
+    tools:context=".Android.DashboardActivity">
 
     <com.github.vipulasri.timelineview.TimelineView
-        android:id="@+id/dashboard_process"
-        android:layout_width="19dp"
-        android:layout_height="100dp"
-        app:endLineColor="@android:color/darker_gray"
+        android:id="@+id/dashboard_timeline"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:endLineColor="#696969"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboard_titleTextView"
-        app:linePadding="5dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:lineWidth="2dp"
+        app:markerSize="39dp"
         app:marker="@drawable/my_marker"
-        app:markerSize="20dp"
-        app:startLineColor="@android:color/darker_gray" />
+        app:startLineColor="#696969" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        android:padding="20dp"
+        android:background="@android:color/background_light"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dashboard_timeline"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/dashboard_processLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/text_margin"
-            android:layout_marginStart="@dimen/text_margin"
-            android:layout_marginTop="@dimen/text_margin"
             android:fontFamily="sans-serif-condensed"
             android:text="External System"
+            android:layout_marginBottom="20dp"
             android:textColor="#000000"
             android:textSize="18sp" />
 
@@ -40,13 +49,24 @@
             android:id="@+id/dashboard_viewDetailsLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/text_margin"
             android:fontFamily="sans-serif-condensed"
             android:text="View more details >"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="italic" />
-
     </LinearLayout>
+</android.support.constraint.ConstraintLayout>
 
-</LinearLayout>
+    <!--<?xml version="1.0" encoding="utf-8"?>--><!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:app="http://schemas.android.com/apk/res-auto"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:padding="20dp">-->
+
+    <!--<com.github.vipulasri.timelineview.TimelineView--><!--android:id="@+id/dashboard_process"--><!--android:layout_width="19dp"--><!--android:layout_height="100dp"--><!--app:endLineColor="@android:color/darker_gray"--><!--app:layout_constraintBottom_toBottomOf="parent"--><!--app:layout_constraintStart_toStartOf="parent"--><!--app:layout_constraintTop_toBottomOf="@+id/dashboard_titleTextView"--><!--app:linePadding="5dp"--><!--app:lineWidth="2dp"--><!--app:marker="@drawable/my_marker"--><!--app:markerSize="20dp"--><!--app:startLineColor="@android:color/darker_gray" />-->
+
+    <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:orientation="vertical">-->
+
+    <!--<TextView--><!--android:id="@+id/dashboard_processLabel"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_marginBottom="@dimen/text_margin"--><!--android:layout_marginStart="@dimen/text_margin"--><!--android:layout_marginTop="@dimen/text_margin"--><!--android:fontFamily="sans-serif-condensed"--><!--android:text="External System"--><!--android:textColor="#000000"--><!--android:textSize="18sp" />-->
+
+    <!--<TextView--><!--android:id="@+id/dashboard_viewDetailsLabel"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_marginStart="@dimen/text_margin"--><!--android:fontFamily="sans-serif-condensed"--><!--android:text="View more details >"--><!--android:textColor="#000000"--><!--android:textSize="18sp"--><!--android:textStyle="italic" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->

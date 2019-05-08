@@ -1,5 +1,6 @@
 package com.cmp404.cloud_brokerapplication.Android;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -26,6 +27,9 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
 
         application = (BrokerApplication) getApplication();
         database = application.database;
@@ -57,7 +61,7 @@ public class LoginActivity extends Activity {
                     cancel = true;
                 }
 
-                if(!cancel){
+                if (!cancel) {
                     attemptLogin(email, password);
                 }
 
@@ -73,14 +77,14 @@ public class LoginActivity extends Activity {
         });
     }
 
-    public void attemptLogin(final String email, final String password){
+    public void attemptLogin(final String email, final String password) {
         new AsyncTask<Void, Void, Boolean>() {
             private JSONObject result;
 
             @Override
             protected Boolean doInBackground(Void... params) {
                 result = database.login(email, password);
-                if(result == null)
+                if (result == null)
                     return false;
                 else
                     return true;
@@ -91,7 +95,7 @@ public class LoginActivity extends Activity {
                 // Access system if authentication verified, otherwise show error
                 if (success) {
                     try {
-                        if(result.get("password").equals(password)){
+                        if (result.getString("password").equals(password)) {
                             loadProfile(result);
                             Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                             startActivity(intent);
@@ -101,18 +105,18 @@ public class LoginActivity extends Activity {
                         passwordEditText.requestFocus();
                     }
                 } else {
-                  passwordEditText.setError("You have entered incorrect credentials, please try again!");
-                  passwordEditText.requestFocus();
+                    passwordEditText.setError("You have entered incorrect credentials, please try again!");
+                    passwordEditText.requestFocus();
                 }
             }
         }.execute();
     }
 
-    public void loadProfile(JSONObject user){
-            if(user != null)
-                application.loadProfile(user);
-            else
-                Toast.makeText(getApplicationContext(), "Server error occurred. Please try again.", Toast.LENGTH_LONG).show();
+    public void loadProfile(JSONObject user) {
+        if (user != null)
+            application.loadProfile(user);
+        else
+            Toast.makeText(getApplicationContext(), "Server error occurred. Please try again.", Toast.LENGTH_LONG).show();
 
     }
 }

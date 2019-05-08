@@ -1,8 +1,11 @@
 package com.cmp404.cloud_brokerapplication.Android;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,8 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.cmp404.cloud_brokerapplication.Helpers.TimelineItemModel;
+import com.cmp404.cloud_brokerapplication.Helpers.TimelineViewAdapter;
 import com.cmp404.cloud_brokerapplication.R;
 
 import java.util.ArrayList;
@@ -21,62 +26,42 @@ import java.util.List;
 import java.util.Map;
 
 public class DashboardActivity extends Activity {
-    private ListView processesListView;
-    private TextView processLabel;
+    private RecyclerView recyclerView;
+    private BrokerApplication application;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-//        processesListView = (ListView)findViewById(R.id.dashboard_processesListView);
-//        ArrayList<Map<String, String>> data = new ArrayList<Map<String, String>>();
-//
-//        for(int i=0; i<4; i++) {
-//            Map<String, String> process = new HashMap<>();
-//            if(i==0)
-//                process.put("name", "Renew your insurance plan");
-//            else if(i==1)
-//                process.put("name","Book an appointment to get your car checked");
-//            else if(i==2)
-//                process.put("name","Pay for your traffic fees");
-//            else if(i==3)
-//                process.put("name","Pay your RTA registration fees");
-//            data.add(process);
-//        }
-//
-//        int resource = R.layout.list_item_dashboard;
-//        String[] from = {"name"};
-//        int[] to = {R.id.dashboard_processLabel};
-//
-//        SimpleAdapter simpleAdapter = new SimpleAdapter(this, data, resource, from, to) {
-//            @Override
-//            public View getView(int position, View convertView, ViewGroup parent) {
-//                if (convertView == null) {
-//                    convertView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.list_item_dashboard, parent, false);
-//                }
-//
-//                Map<String, String> entryData = (Map<String, String>) getItem(position);
-//                processLabel = (TextView) convertView.findViewById(R.id.dashboard_processLabel);
-//                processLabel.setText(entryData.get("name"));
-//
-//                return convertView;
-//            }
-//
-//        };
-//
-//        processesListView.setAdapter(simpleAdapter);
-//
-//        processesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-////                Intent intent = new Intent(getActivity(), Item.class);
-////                intent.putExtra("taskId", view.getTag().toString());
-////                intent.putExtra("projectId", projectId);
-////                intent.putExtra("sectionId", section.getId());
-////                startActivityForResult(intent, 2);
-//            }
-//        });
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
+
+        application = (BrokerApplication) getApplication();
+        init();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        init();
+    }
+
+    public void init(){
+        List<TimelineItemModel> items = new ArrayList<>();
+
+        items.add(new TimelineItemModel("Renew your insurance plan", application.currentUser.isInsuranceDone() == true ? TimelineItemModel.Status.DONE : TimelineItemModel.Status.IN_PROGRESS));
+        items.add(new TimelineItemModel("Get your car checked", application.currentUser.isBookingDone() == true ? TimelineItemModel.Status.DONE : TimelineItemModel.Status.IN_PROGRESS));
+        items.add(new TimelineItemModel("Pay for your traffic fees", application.currentUser.isPaidFines() == true ? TimelineItemModel.Status.DONE : TimelineItemModel.Status.IN_PROGRESS));
+        items.add(new TimelineItemModel("Pay your RTA registration fees", application.currentUser.isPaidRenewal() == true ? TimelineItemModel.Status.DONE : TimelineItemModel.Status.IN_PROGRESS));
+
+        recyclerView = findViewById(R.id.recycler_view);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,
+                items.size(),
+                GridLayoutManager.HORIZONTAL,
+                false);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(new TimelineViewAdapter(items));
+    }
 }

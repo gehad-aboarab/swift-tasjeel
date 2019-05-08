@@ -1,5 +1,6 @@
 package com.cmp404.cloud_brokerapplication.Android;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,9 @@ public class DubaiPoliceActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dubai_police);
 
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
+
         application = (BrokerApplication) getApplication();
         database = application.database;
 
@@ -48,8 +52,10 @@ public class DubaiPoliceActivity extends Activity {
                 if(application.trafficFines.size() > 0 && application.trafficFines != null) {
                     selectedFine = (Fine) finesSpinner.getSelectedItem();
                     payFine(selectedFine.fineNo);
-                } else
+                } else {
+                    application.currentUser.setPaidFines(true);
                     Toast.makeText(getApplicationContext(), "No fines selected.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -58,8 +64,10 @@ public class DubaiPoliceActivity extends Activity {
             public void onClick(View view) {
                 if(application.trafficFines.size() > 0 && application.trafficFines != null)
                     payFine("all");
-                else
+                else {
+                    application.currentUser.setPaidFines(true);
                     Toast.makeText(getApplicationContext(), "No fines to pay.", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -68,7 +76,7 @@ public class DubaiPoliceActivity extends Activity {
         String base = application.BASE_URL;
         String systemPath = application.DUBAI_POLICE_PATH;
         String service = application.DUBAI_POLICE_GET_FINES;
-        String params = application.currentUser.licensePlate;
+        String params = application.currentUser.getLicensePlate();
 
         Log.d("DubaiPolice_Tag", base+systemPath+service+params);
         String result = application.externalInterface.callWebService(base + systemPath + service + params);
@@ -100,15 +108,16 @@ public class DubaiPoliceActivity extends Activity {
         String base = application.BASE_URL;
         String systemPath = application.DUBAI_POLICE_PATH;
         String service = application.DUBAI_POLICE_PAYMENT;
-        String params = fineNo + "/" + application.currentUser.licensePlate + "/" + application.currentUser.creditCard + "/" + "1000";
+        String params = fineNo + "/" + application.currentUser.getLicensePlate() + "/" + application.currentUser.getCreditCard() + "/" + "1000";
 
         Log.d("DubaiPolice_Tag", base + systemPath + service + params);
         String result = application.externalInterface.callWebService(base + systemPath + service + params);
+        Log.d("DubaiPolice_Tag", result);
 
         if (!result.equals("{}")) {
             Toast.makeText(getApplicationContext(), "Fine payment made!", Toast.LENGTH_LONG).show();
-            if (fineNo.equals("all")) {
-                application.currentUser.paidFines = true;
+            if (fineNo.equals("all") || application.trafficFines.size() == 1) {
+                application.currentUser.setPaidFines(true);
             }
             finish();
 

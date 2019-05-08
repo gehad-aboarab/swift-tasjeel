@@ -31,7 +31,6 @@ public class BrokerApplication extends Application {
     public final String RTA_RENEWAL_FEES = "renewal-fees/";
     public final String RTA_RENEW_REGISTRATION = "renew-registration/";
 
-//    public String currentUserName, currentEmail, currentRegistrationNo, currentLicenseNo, currentCreditCard;
     public User currentUser;
     public ArrayList<Insurance> insuranceCompanies;
     public ArrayList<TestingCenter> testingCenters;
@@ -48,6 +47,6 @@ public class BrokerApplication extends Application {
     }
 
     public void loadProfile(JSONObject user){
-        currentUser = new User(user);
+        currentUser = new User(this, user);
     }
 }

@@ -7,98 +7,19 @@
     android:background="#eeee"
     tools:context="com.cmp404.cloud_brokerapplication.Android.DashboardActivity">
 
-    <!--<TextView-->
-        <!--android:id="@+id/dashboard_titleTextView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:fontFamily="sans-serif-condensed"-->
-        <!--android:gravity="center"-->
-        <!--android:text="Renew your Registration"-->
-        <!--android:textColor="#FF58B999"-->
-        <!--android:textSize="36sp"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
-
-
-    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="515dp"-->
-        <!--android:padding="20dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@id/dashboard_titleTextView">-->
-
-        <com.github.vipulasri.timelineview.TimelineView
-            android:id="@+id/timeline"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:markerSize="20dp"
-            app:lineWidth="2dp"
-            app:startLineColor="@color/colorPrimary"
-            app:endLineColor="@color/colorPrimary"/>
-
-        <!--<com.github.vipulasri.timelineview.TimelineView-->
-            <!--android:id="@+id/dashboard_process"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--app:endLineColor="@android:color/darker_gray"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/dashboard_titleTextView"-->
-            <!--app:linePadding="5dp"-->
-            <!--app:lineWidth="2dp"-->
-            <!--app:marker="@drawable/my_marker"-->
-            <!--app:markerSize="20dp"-->
-            <!--app:startLineColor="#000" />-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="516dp"-->
-            <!--android:orientation="vertical">-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/dashboard_processLabel"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/text_margin"-->
-                <!--android:layout_marginStart="@dimen/text_margin"-->
-                <!--android:layout_marginTop="@dimen/text_margin"-->
-                <!--android:fontFamily="sans-serif-condensed"-->
-                <!--android:text="External System"-->
-                <!--android:textColor="#000000"-->
-                <!--android:textSize="18sp" />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/dashboard_viewDetailsLabel"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginStart="@dimen/text_margin"-->
-                <!--android:fontFamily="sans-serif-condensed"-->
-                <!--android:text="View more details >"-->
-                <!--android:textColor="#000000"-->
-                <!--android:textSize="18sp"-->
-                <!--android:textStyle="italic" />-->
-
-        <!--</LinearLayout>-->
-    <!--</LinearLayout>-->
-
-    <!--<ListView-->
-        <!--android:id="@+id/dashboard_processesListView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:divider="@android:color/transparent"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@id/dashboard_titleTextView" />-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="8dp"
+        android:background="#eeee"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
 

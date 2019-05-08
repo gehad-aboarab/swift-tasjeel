@@ -1,6 +1,7 @@
 package com.cmp404.cloud_brokerapplication.Android;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -47,6 +48,9 @@ public class InsuranceActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insurance);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
 
         application = (BrokerApplication) getApplication();
         database = application.database;
@@ -219,13 +223,15 @@ public class InsuranceActivity extends Activity {
         String systemPath = application.INSURANCE_PATH;
         String company = selectedCompany.path + "/";
         String service = application.INSURANCE_REGISTER_PACKAGE;
-        String params = application.currentUser.name + "/" + application.currentUser.contact + "/" + packageNo;
+        String params = application.currentUser.getName() + "/" + application.currentUser.getContact() + "/" + packageNo;
 
+        Log.d("InsuranceActivity_Log", base + systemPath + company + service + params);
         String result = application.externalInterface.callWebService(base + systemPath + company + service + params);
         try {
             if(!result.equals("{}")) {
                 JSONObject resultObject = new JSONObject(result);
-                application.currentUser.insurancePackageRef = resultObject.getString("reference-no");
+                application.currentUser.setInsurancePackageRef(resultObject.getString("reference-no"));
+                application.currentUser.setInsuranceDone(true);
                 Toast.makeText(getApplicationContext(), "Registered for package successfully!", Toast.LENGTH_LONG).show();
                 finish();
             }
@@ -240,10 +246,12 @@ public class InsuranceActivity extends Activity {
         String systemPath = application.INSURANCE_PATH;
         String company = selectedCompany.path + "/";
         String service = application.INSURANCE_RENEW_PLAN;
-        String params = referenceNo + "/" + application.currentUser.creditCard + "/" + "1000";
+        String params = referenceNo + "/" + application.currentUser.getCreditCard() + "/" + "1000";
 
         String result = application.externalInterface.callWebService(base + systemPath + company + service + params);
         if(!result.equals("{}")){
+            application.currentUser.setInsurancePackageRef(referenceNo);
+            application.currentUser.setInsuranceDone(true);
             Toast.makeText(getApplicationContext(), "Plan renewed successfully!", Toast.LENGTH_LONG).show();
             finish();
         } else {
@@ -259,6 +267,7 @@ public class InsuranceActivity extends Activity {
         String service = application.INSURANCE_GET_PLAN;
         String params = referenceNo;
 
+        Log.d("InsuranceActivity_Log", base + systemPath + company + service + params);
         String result = application.externalInterface.callWebService(base + systemPath + company + service + params);
         Log.d("InsuranceActivity_Log", result);
         return result;

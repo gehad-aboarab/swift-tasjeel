@@ -1,6 +1,8 @@
 package com.cmp404.cloud_brokerapplication.Helpers;
 
 
+import android.util.Log;
+
 import com.cmp404.cloud_brokerapplication.Android.BrokerApplication;
 import com.cmp404.cloud_brokerapplication.Entities.Insurance;
 import com.cmp404.cloud_brokerapplication.Entities.TestingCenter;
@@ -14,6 +16,7 @@ import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCollection;
 import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -58,7 +61,7 @@ public class DatabaseHelper {
 
     public JSONObject login(final String email, final String password) {
         JSONObject result = exists(email);
-        if(result != null) {
+        if (result != null) {
             try {
                 if (result.get("email").equals(email) && !result.get("password").equals(password)) {
                     result = new JSONObject();
@@ -70,6 +73,7 @@ public class DatabaseHelper {
             }
         }
 
+        Log.d("DatabaseHelper_login", result.toString());
         return result;
     }
 
@@ -80,30 +84,39 @@ public class DatabaseHelper {
                              final String licenseNo,
                              final String creditCard) {
 
-        if(exists(email) == null) {
+        if (exists(email) == null) {
             Document document = new Document();
             document.put("name", name);
             document.put("email", email);
             document.put("password", password);
-            document.put("registrationNo", registrationNo);
-            document.put("licenseNo", licenseNo);
-            document.put("creditCard", creditCard);
+            document.put("registration-no", registrationNo);
+            document.put("license-no", licenseNo);
+            document.put("credit-card", creditCard);
+            document.put("insurance", false);
+            document.put("testing", false);
+            document.put("fines", false);
+            document.put("renewal", false);
+            document.put("insurance-ref", "");
+            document.put("testing-ref", "");
             userCollection.insertOne(document);
 
+            Log.d("DatabaseHelper_signup", new JSONObject(document).toString());
             return new JSONObject(document);
 
-        } else{
+
+        } else {
             JSONObject result = new JSONObject();
             try {
                 result.put("valid", "false");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
             return result;
         }
     }
 
-    public void initInsuranceCompanies(){
+    public void initInsuranceCompanies() {
         final ArrayList<Document> documents = new ArrayList<Document>();
         RemoteFindIterable<Document> iterable = entitiesCollection.find();
 
@@ -117,8 +130,8 @@ public class DatabaseHelper {
         }
 
         application.insuranceCompanies = new ArrayList<>();
-        for(Document d:documents){
-            if(d.getString("type").equals("insurance")) {
+        for (Document d : documents) {
+            if (d.getString("type").equals("insurance")) {
                 d.append("id", d.get("_id").toString());
                 d.remove("_id");
                 application.insuranceCompanies.add(new Insurance(new JSONObject(d)));
@@ -126,7 +139,7 @@ public class DatabaseHelper {
         }
     }
 
-    public void initTestingCenters(){
+    public void initTestingCenters() {
         final ArrayList<Document> documents = new ArrayList<Document>();
         RemoteFindIterable<Document> iterable = entitiesCollection.find();
 
@@ -140,12 +153,26 @@ public class DatabaseHelper {
         }
 
         application.testingCenters = new ArrayList<>();
-        for(Document d:documents){
-            if(d.getString("type").equals("testing-center")) {
+        for (Document d : documents) {
+            if (d.getString("type").equals("testing-center")) {
                 d.append("id", d.get("_id").toString());
                 d.remove("_id");
                 application.testingCenters.add(new TestingCenter(new JSONObject(d)));
             }
         }
+    }
+
+    public void updateUserStrings(String key, String value) {
+        Bson filter = new Document("email", application.currentUser.getContact());
+        Bson newValue = new Document(key, value);
+        Bson updateOperationDocument = new Document("$set", newValue);
+        userCollection.updateOne(filter, updateOperationDocument);
+    }
+
+    public void updateUserBooleans(String key, boolean value) {
+        Bson filter = new Document("email", application.currentUser.getContact());
+        Bson newValue = new Document(key, value);
+        Bson updateOperationDocument = new Document("$set", newValue);
+        userCollection.updateOne(filter, updateOperationDocument);
     }
 }

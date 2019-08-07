@@ -19,3 +19,5 @@ These must also be hosted on AWS for the server to receive meaningful data and r
 
 ### Step 3
 Build and run the application on an Android device.
+
+Documentation and screenshots can be found at: https://drive.google.com/open?id=1NSgZSlcVzEt0PANZZNBPNJxKfUhTxv1L

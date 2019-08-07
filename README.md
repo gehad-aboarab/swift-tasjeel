@@ -14,6 +14,7 @@ Additionally, the following Java applications represent dummy entities that expo
 - Testing Center: https://github.com/gehad-aboarab/cloud-testing-center-services
 - Dubai Police: https://github.com/gehad-aboarab/cloud-dubai-police-services
 - RTA: https://github.com/gehad-aboarab/cloud-rta-services
+
 These must also be hosted on AWS for the server to receive meaningful data and relay to the application.
 
 ### Step 3
